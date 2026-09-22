@@ -8,7 +8,7 @@ from copy import deepcopy
 from pathlib import Path
 
 import torch
-import torch.nn as nn
+from torch import nn
 
 from ultralytics.nn.autobackend import check_class_names
 from ultralytics.nn.modules import (
@@ -18,13 +18,16 @@ from ultralytics.nn.modules import (
     C2PSA,
     C3,
     C3TR,
+    CEM,
     ELAN1,
+    MSFE,
     OBB,
     OBB26,
     PSA,
     SPP,
     SPPELAN,
     SPPF,
+    SSFF,
     A2C2f,
     AConv,
     ADown,
@@ -39,7 +42,6 @@ from ultralytics.nn.modules import (
     C3x,
     CBFuse,
     CBLinear,
-    CEM,
     Classify,
     Concat,
     Conv,
@@ -56,7 +58,6 @@ from ultralytics.nn.modules import (
     ImagePoolingAttn,
     Index,
     LRPCHead,
-    MSFE,
     Pose,
     Pose26,
     RepC3,
@@ -68,7 +69,6 @@ from ultralytics.nn.modules import (
     SCDown,
     Segment,
     Segment26,
-    SSFF,
     TorchVision,
     WorldDetect,
     YOLOEDetect,
@@ -1380,11 +1380,9 @@ class SafeClass:
 
     def __init__(self, *args, **kwargs):
         """Initialize SafeClass instance, ignoring all arguments."""
-        pass
 
     def __call__(self, *args, **kwargs):
         """Run SafeClass instance, ignoring all arguments."""
-        pass
 
 
 class SafeUnpickler(pickle.Unpickler):
