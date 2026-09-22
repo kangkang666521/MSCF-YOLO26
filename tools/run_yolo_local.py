@@ -7,6 +7,7 @@ import ast
 from pathlib import Path
 
 import torch
+
 from ultralytics import YOLO
 
 
@@ -27,9 +28,8 @@ def _backbone_layers(model: YOLO):
 def _transfer_backbone_by_order(model: YOLO, weights: str) -> int:
     """Transfer compatible YOLO26s backbone tensors despite inserted MSCF modules.
 
-    MSCF-YOLO26 inserts MSFE and CEM blocks, so matching state-dictionary keys by
-    numerical layer index initializes only a small subset of the backbone. This
-    routine instead walks the source and target backbones in order, skips inserted
+    MSCF-YOLO26 inserts MSFE and CEM blocks, so matching state-dictionary keys by numerical layer index initializes only
+    a small subset of the backbone. This routine instead walks the source and target backbones in order, skips inserted
     module types, and copies only tensors whose names and shapes match exactly.
     """
     source_layers = _backbone_layers(YOLO(weights))
@@ -46,7 +46,11 @@ def _transfer_backbone_by_order(model: YOLO, weights: str) -> int:
         target = target_layers[target_index]
         source_state = source.state_dict()
         target_state = target.state_dict()
-        compatible = {key: value for key, value in source_state.items() if key in target_state and value.shape == target_state[key].shape}
+        compatible = {
+            key: value
+            for key, value in source_state.items()
+            if key in target_state and value.shape == target_state[key].shape
+        }
         target.load_state_dict(compatible, strict=False)
         transferred += len(compatible)
         target_index += 1
@@ -83,7 +87,13 @@ def main() -> None:
         key, value = item.split("=", 1)
         overrides[key] = _value(value)
 
-    common = {"imgsz": args.imgsz, "batch": args.batch, "workers": args.workers, "project": args.project, "name": args.name}
+    common = {
+        "imgsz": args.imgsz,
+        "batch": args.batch,
+        "workers": args.workers,
+        "project": args.project,
+        "name": args.name,
+    }
     if args.device is not None:
         common["device"] = args.device
     common.update(overrides)

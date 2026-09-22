@@ -10,14 +10,13 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-
 # =========================
 # CONFIG: edit this block
 # =========================
 WEIGHT = r"C:\Users\18377\Desktop\ALL\weights\best.pt"
 DATA_YAML = r"D:\yolo26\ultralytics-main\experiments\datasets\visdrone2019_local.yaml"
-SPLIT = "val"       # match the original training-time validation split
-DEVICE = "0"        # "0" or "cpu"
+SPLIT = "val"  # match the original training-time validation split
+DEVICE = "0"  # "0" or "cpu"
 BATCH = 4
 IMGSZ = 640
 CONF = 0.001
