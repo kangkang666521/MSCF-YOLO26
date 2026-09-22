@@ -4,8 +4,8 @@
 from __future__ import annotations
 
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
+from torch import nn
 
 from ultralytics.utils.torch_utils import fuse_conv_and_bn
 
@@ -18,13 +18,17 @@ __all__ = (
     "C2PSA",
     "C3",
     "C3TR",
+    "CEM",
     "CIB",
     "DFL",
     "ELAN1",
+    "MSFE",
+    "MSFECEM",
     "PSA",
     "SPP",
     "SPPELAN",
     "SPPF",
+    "SSFF",
     "AConv",
     "ADown",
     "Attention",
@@ -40,21 +44,17 @@ __all__ = (
     "C3x",
     "CBFuse",
     "CBLinear",
-    "CEM",
     "ContrastiveHead",
     "GhostBottleneck",
     "HGBlock",
     "HGStem",
     "ImagePoolingAttn",
-    "MSFE",
-    "MSFECEM",
     "Proto",
     "RepC3",
     "RepNCSPELAN4",
     "RepVGGDW",
     "ResNetLayer",
     "SCDown",
-    "SSFF",
     "TorchVision",
 )
 
