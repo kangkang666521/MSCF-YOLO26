@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import argparse
 import os
 import sys
@@ -15,7 +16,6 @@ import torch.nn.functional as F
 
 from ultralytics import YOLO
 from ultralytics.data.augment import LetterBox
-
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff", ".webp"}
 
