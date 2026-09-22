@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import argparse
 import os
 import sys
@@ -15,7 +16,6 @@ import torch.nn.functional as F
 
 from ultralytics import YOLO
 from ultralytics.data.augment import LetterBox
-
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff", ".webp"}
 
@@ -64,7 +64,7 @@ def preprocess(image_path: Path, imgsz: int, device: torch.device):
 
     h0, w0 = image_bgr.shape[:2]
     gain = min(imgsz / h0, imgsz / w0)
-    new_w, new_h = int(round(w0 * gain)), int(round(h0 * gain))
+    new_w, new_h = round(w0 * gain), round(h0 * gain)
     pad_w = (imgsz - new_w) / 2
     pad_h = (imgsz - new_h) / 2
     return resized_bgr, tensor.to(device), gain, pad_w, pad_h
@@ -107,7 +107,9 @@ def box_iou(boxes1: torch.Tensor, box2: torch.Tensor) -> torch.Tensor:
     return inter / (area1 + area2 - inter + 1e-7)
 
 
-def convert_box_to_letterbox(box_xyxy: np.ndarray, gain: float, pad_w: float, pad_h: float, device: torch.device) -> torch.Tensor:
+def convert_box_to_letterbox(
+    box_xyxy: np.ndarray, gain: float, pad_w: float, pad_h: float, device: torch.device
+) -> torch.Tensor:
     box = torch.tensor(box_xyxy, dtype=torch.float32, device=device)
     box[[0, 2]] = box[[0, 2]] * gain + pad_w
     box[[1, 3]] = box[[1, 3]] * gain + pad_h
@@ -115,7 +117,7 @@ def convert_box_to_letterbox(box_xyxy: np.ndarray, gain: float, pad_w: float, pa
 
 
 def draw_box(image: np.ndarray, box_xyxy: np.ndarray, text: str):
-    x1, y1, x2, y2 = [int(round(v)) for v in box_xyxy]
+    x1, y1, x2, y2 = [round(v) for v in box_xyxy]
     cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
     cv2.putText(image, text, (x1, max(20, y1 - 6)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2, cv2.LINE_AA)
 
