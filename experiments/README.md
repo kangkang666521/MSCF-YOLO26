@@ -17,13 +17,13 @@ E:\Anaconda\envs\yolo\python.exe tools\run_yolo_local.py train --model ultralyti
 
 Repeat the full-model run with `seed=1` and `seed=2` to obtain the manuscript's mean and standard deviation. The corresponding ablation models are:
 
-| Experiment | Model YAML |
-| --- | --- |
-| MSFE | `ultralytics/cfg/models/26/yolo26-msfe-v1.yaml` |
-| CEM | `ultralytics/cfg/models/26/yolo26-cem-v1.yaml` |
-| MSFE + CEM | `ultralytics/cfg/models/26/yolo26-msfe-cem-v1.yaml` |
-| SSFF + P2 | `ultralytics/cfg/models/26/yolo26-ssff-p2-v1.yaml` |
-| MSCF-YOLO26 | `ultralytics/cfg/models/26/yolo26-thesis-v1.yaml` |
+| Experiment  | Model YAML                                          |
+| ----------- | --------------------------------------------------- |
+| MSFE        | `ultralytics/cfg/models/26/yolo26-msfe-v1.yaml`     |
+| CEM         | `ultralytics/cfg/models/26/yolo26-cem-v1.yaml`      |
+| MSFE + CEM  | `ultralytics/cfg/models/26/yolo26-msfe-cem-v1.yaml` |
+| SSFF + P2   | `ultralytics/cfg/models/26/yolo26-ssff-p2-v1.yaml`  |
+| MSCF-YOLO26 | `ultralytics/cfg/models/26/yolo26-thesis-v1.yaml`   |
 
 Validate a trained checkpoint with:
 
